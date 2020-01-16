@@ -45,7 +45,7 @@ router.post('/signin', async (req, res) => {
         res.send({ token });
     } catch (err) {
         console.log('password not match: ', err.message);
-        return res.status(422).send({ error: 'Invalid password or email.' });
+        return res.status(422).send({ error: 'Invalid password or email.', message: err.message });
     }
 });
 
