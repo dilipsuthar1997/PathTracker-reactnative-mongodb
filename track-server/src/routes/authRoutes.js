@@ -6,13 +6,19 @@ const router = express.Router();
 
 router.post('/signup', async (req, res) => {
     console.log(req.body);
-
+    // Destructing request body --
     const { email, password } = req.body;
 
-    const user = new User({ email, password });
-    await user.save();
+    // handling error here --
+    try {
 
-    res.send('You mase a post request');
+        const user = new User({ email, password });
+        await user.save();
+        res.send('You mase a post request');
+        
+    } catch (err) {
+        return res.status(422).send(err.message);
+    }
 });
 
 module.exports = router;
