@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
-const AccountScreen = () => {
+const AccountScreen = ({ navigation }) => {
     return(
         <View>
             <Text style={{fontSize: 48}}>Account Screen</Text>
