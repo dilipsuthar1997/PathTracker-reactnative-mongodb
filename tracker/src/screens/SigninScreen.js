@@ -1,27 +1,26 @@
 import React, { useContext } from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { Text, Divider } from 'react-native-elements';
-import { Context as AuthContext } from '../context/AuthProvider';
+import { View, StyleSheet } from 'react-native';
+import { Divider } from 'react-native-elements';
+import { Context as AuthContext } from '../context/AuthContext';
+import { NavigationEvents } from 'react-navigation';
 import Spacer from '../components/Spacer';
 import AuthForm from '../components/AuthForm';
 import NavLink from '../components/NavLink';
 
-const SignupScreen = ({navigation}) => {
+const SigninScreen = () => {
 
-    const { state, signup } = useContext(AuthContext);
-
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
-
-    console.log(state);
+    const { state, signin, clearErrorMessage } = useContext(AuthContext);
 
     return(
         <View style={styles.container}>
+            <NavigationEvents
+                onWillBlur={clearErrorMessage}
+            />
             <AuthForm
-                headerText="Sign Up for Tracker"
+                headerText="Sign In for Tracker"
                 errorMessage={state.errorMessage}
-                btnLabel="Sign up"
-                onSubmit={({ email, password }) => signup({ email, password })}
+                btnLabel="Sign in"
+                onSubmit={signin}
                 loading={state.loading}
             />
 
@@ -31,15 +30,15 @@ const SignupScreen = ({navigation}) => {
 
             <Spacer>
                 <NavLink
-                    text="Already have an account? Sign in"
-                    onPress={() => navigation.navigate('Signin')}
+                    text="Don't have an account? Sign up instead"
+                    routeName="Signup"
                 />
             </Spacer>
         </View>
     );
 }
 
-SignupScreen.navigationOptions = () => {
+SigninScreen.navigationOptions = () => {
     return {
         headerShown: false
     };
@@ -53,4 +52,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default SignupScreen;
+export default SigninScreen;

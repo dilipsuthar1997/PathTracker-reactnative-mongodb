@@ -1,9 +1,10 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { navigate } from '../navigationRef';
 
-const NavLink = ({ text, onPress }) => {
+const NavLink = ({ text, routeName }) => {
     return(
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPress={() => navigate(routeName)}>
             <Text style={styles.text}>{text}</Text>
         </TouchableOpacity>
     );
@@ -12,7 +13,8 @@ const NavLink = ({ text, onPress }) => {
 const styles = StyleSheet.create({
     text: {
         color: 'blue',
-        fontWeight: 'bold'
+        fontSize: 18,
+        fontWeight: '500'
     }
 });
 
