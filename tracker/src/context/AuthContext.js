@@ -1,7 +1,16 @@
+// =======>>>>>>>> LIBRARIES <<<<<<<<=======
 import { AsyncStorage } from 'react-native';
 import createDataContext from './createDataContext';
 import trackerAPI from '../api/tracker';
 import { navigate } from '../navigationRef';
+import {
+    ADD_ERROR,
+    CLEAR_ERROR_MESSAGE,
+    GET_AUTH_START,
+    GET_SIGNIN,
+    GET_SIGNOUT,
+    GET_SIGNUP
+} from './Types';
 
 const INITIAL_STATE = {
     loading: false,
@@ -9,20 +18,13 @@ const INITIAL_STATE = {
     errorMessage: ''
 };
 
-const ADD_ERROR = 'add_error';
-const AUTHENTICATION_START = 'start_authentication';
-const SIGNUP = 'signup';
-const SIGNIN = 'signin';
-const SIGNOUT = 'signout';
-const CLEAR_ERROR_MESSAGE = 'clear_error_message';
-
 const authReducer = (state, action) => {
     switch (action.type) {
-        case AUTHENTICATION_START:
+        case GET_AUTH_START:
             return { ...state, loading: true, errorMessage: '' };
-        case SIGNUP || SIGNIN:
+        case GET_SIGNUP || GET_SIGNIN:
             return { ...state, token: action.payload, loading: false };
-        case SIGNOUT:
+        case GET_SIGNOUT:
             return INITIAL_STATE;       
         case ADD_ERROR:
             return { ...state, errorMessage: action.payload, loading: false };
@@ -35,12 +37,12 @@ const authReducer = (state, action) => {
 };
 
 const signup = (dispatch) => async ({ email, password }) => {
-        dispatch({ type: AUTHENTICATION_START });
+        dispatch({ type: GET_AUTH_START });
 
         try {
             const response = await trackerAPI.post('/signup', { email, password });
             await AsyncStorage.setItem('token', response.data.token);
-            dispatch({ type: SIGNUP, payload: response.data.token });
+            dispatch({ type: GET_SIGNUP, payload: response.data.token });
 
             navigate('TrackList');
         } catch (err) {
@@ -49,12 +51,12 @@ const signup = (dispatch) => async ({ email, password }) => {
     };
 
 const signin = (dispatch) => async ({ email, password }) => {
-        dispatch({ type: AUTHENTICATION_START });
+        dispatch({ type: GET_AUTH_START });
 
         try {
             const response = await trackerAPI.post('/signin', { email, password });
             await AsyncStorage.setItem('token', response.data.token);
-            dispatch({ type: SIGNIN, payload: response.data.token });
+            dispatch({ type: GET_SIGNIN, payload: response.data.token });
 
             navigate('TrackList');
         } catch (err) {
@@ -66,7 +68,7 @@ const tryLocalSignin = (dispatch) => async () => {
     const token = await AsyncStorage.getItem('token');
     if (token) {
         navigate('TrackList');
-        dispatch({ type: SIGNIN, payload: token });
+        dispatch({ type: GET_SIGNIN, payload: token });
     } else {
         navigate('Signup');
     }
@@ -74,7 +76,7 @@ const tryLocalSignin = (dispatch) => async () => {
 
 const signout = (dispatch) => async () => {
     await AsyncStorage.removeItem('token');
-    dispatch({ type: SIGNOUT });
+    dispatch({ type: GET_SIGNOUT });
     navigate('loginFlow');
 };
 
