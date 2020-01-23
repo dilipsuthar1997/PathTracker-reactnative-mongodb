@@ -8,7 +8,7 @@ import { Context as AuthContext } from '../../context/AuthContext';
 
 const AccountScreen = () => {
 
-    const { signout } = useContext(AuthContext);
+    const { state: { token }, signout } = useContext(AuthContext);
 
     return(
         <SafeAreaView forceInset={{ top: 'always'}}>
@@ -18,6 +18,9 @@ const AccountScreen = () => {
                     title="Sign out"
                     onPress={signout}
                 />
+            </Spacer>
+            <Spacer>
+                <Text style={{color: 'red'}}>{`Token:\n${token}`}</Text>
             </Spacer>
         </SafeAreaView>
     );

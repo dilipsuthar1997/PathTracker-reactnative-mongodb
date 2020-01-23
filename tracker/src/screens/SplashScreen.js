@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, StatusBar } from 'react-native';
 import { Context as AuthContext } from '../context/AuthContext';
+import { images, matrics } from '../commonConfig';
 
 const SplashScreen = () => {
 
@@ -14,7 +15,8 @@ const SplashScreen = () => {
 
     return(
         <View style={styles.container}>
-            <Image style={styles.icon} source={require('../res/ic_tracker.png')}/>
+            {/* <StatusBar barStyle="light-content"/> */}
+            <Image style={styles.icon} source={images.APPLOGO}/>
             <Text style={styles.title}>Tracker</Text>
         </View>
     );
@@ -23,19 +25,19 @@ const SplashScreen = () => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#000',
-        flex: 1,
+        flex: matrics.Scale(1),
         justifyContent: 'center',
         alignItems: 'center'
     },
     icon: {
-        height: 120,
-        width: 120,
+        height: matrics.Scale(120),
+        width: matrics.Scale(120),
         tintColor: '#FFF'
     },  
     title: {
-        marginTop: 8,
+        marginTop: matrics.Scale(8),
         color: '#FFF',
-        fontSize: 36,
+        fontSize: matrics.Scale(36),
         fontWeight: '500'
     }
 });

@@ -22,7 +22,9 @@ const authReducer = (state, action) => {
     switch (action.type) {
         case GET_AUTH_START:
             return { ...state, loading: true, errorMessage: '' };
-        case GET_SIGNUP || GET_SIGNIN:
+        case GET_SIGNUP:
+            return { ...state, token: action.payload, loading: false };
+        case GET_SIGNIN:
             return { ...state, token: action.payload, loading: false };
         case GET_SIGNOUT:
             return INITIAL_STATE;       
