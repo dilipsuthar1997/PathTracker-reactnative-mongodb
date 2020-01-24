@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { StyleSheet, ActivityIndicator } from 'react-native';
-import MapView, { Polygon, Circle, Marker } from 'react-native-maps';
+import MapView, { Circle, Marker, Polyline } from 'react-native-maps';
 import { matrics, colors } from '../commonConfig';
 import { Context as LocationContext } from '../context/LocationContext';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const Map = ({ currentCoords }) => {  
+const Map = () => {  
 
     const { state: { currentLocation, locations } } = useContext(LocationContext);
     //console.log(state);
@@ -41,7 +41,7 @@ const Map = ({ currentCoords }) => {
                 fillColor="rgba(67,160,71, 0.2)"
             />
 
-            <Polygon
+            <Polyline
                 coordinates={
                     locations.map(location => location.coords)
                 }

@@ -1,4 +1,4 @@
-//import '../_mockLocation';
+import '../_mockLocation';
 import React, { useContext, useCallback, useState } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-elements';
@@ -14,12 +14,13 @@ const TrackCreateScreen = ({ isFocused }) => {
 
     const { state: { isRecording, currentLocation }, addLocation } = useContext(LocationContext);
 
+    // useCallback -hook
     const memoizedCallback = useCallback((location) => {
         addLocation(location, isRecording)
     }, [isRecording]);
 
+    // useLocation -custom hook
     const [err] = useLocation(isFocused || isRecording, memoizedCallback);
-    // const [coords, setCoords] = useState(null);
 
     return(
         <SafeAreaView forceInset={{ top: 'always' }}>
@@ -36,6 +37,11 @@ const TrackCreateScreen = ({ isFocused }) => {
     );
 }
 
+TrackCreateScreen.navigationOptions = {
+    title: 'Add Track',
+    tabBarIcon: ({tintColor}) => <Icon name="add-location" size={20} color={tintColor}/>
+}
+
 const styles = StyleSheet.create({
     locateMeContainer: {
         backgroundColor: colors.WHITE,
@@ -47,7 +53,8 @@ const styles = StyleSheet.create({
         shadowOpacity: matrics.Scale(0.3),
         elevation: matrics.Scale(3),
         position: 'absolute',
-        margin: matrics.Scale(16)
+        margin: matrics.Scale(16),
+        zIndex: matrics.Scale(3)
     }
 });
 

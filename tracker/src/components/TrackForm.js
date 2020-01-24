@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { View, StyleSheet } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import { Context as LocationContext } from '../context/LocationContext';
 import Spacer from './Spacer'
 import { colors } from '../commonConfig';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import useSaveTrack from '../hooks/useSaveTrack';
 
 const TrackForm = () => {
 
@@ -14,6 +14,7 @@ const TrackForm = () => {
         stopRecording,
         changeName
     } = useContext(LocationContext);
+    const [saveTrack] = useSaveTrack();
 
     console.log(locations.length);
 
@@ -43,6 +44,16 @@ const TrackForm = () => {
                     onPress={startRecording}
                     icon={<Icon name="play" size={28} color='white'/>}
                 />}
+            </Spacer>
+            <Spacer>
+                {!isRecording && locations.length > 0 ?
+                <Button
+                    title="Save"
+                    raised
+                    buttonStyle={{backgroundColor: colors.MATEBLACK}}
+                    onPress={saveTrack}
+                    icon={<Icon name="content-save" size={28} color='white'/>}
+                /> : null}
             </Spacer>
         </>
     );

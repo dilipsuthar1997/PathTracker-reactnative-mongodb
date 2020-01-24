@@ -11,3 +11,6 @@ export const ADD_LOCATION = 'add_location';
 export const START_RECORDING = 'start_recording';
 export const STOP_RECORDING = 'stop_recording';
 export const CHANGE_NAME = 'change_name';
+export const RESET = 'reset';
+
+export const FETCH_TRACKS = 'fetch_tracks';

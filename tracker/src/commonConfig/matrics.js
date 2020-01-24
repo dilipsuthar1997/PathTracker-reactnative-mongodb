@@ -1,5 +1,5 @@
 import { Dimensions, Platform } from 'react-native';
-import { scale } from './helper/functions';
+import { scale } from './helpers/functions';
 
 const { width, height } = Dimensions.get('window');
 

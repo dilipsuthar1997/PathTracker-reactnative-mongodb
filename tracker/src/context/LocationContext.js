@@ -4,7 +4,8 @@ import {
     ADD_LOCATION,
     START_RECORDING,
     STOP_RECORDING,
-    CHANGE_NAME
+    CHANGE_NAME,
+    RESET
 } from './Types';
 
 const INITIAL_STATE = {
@@ -26,27 +27,24 @@ const locationReducer = (state, action) => {
             return { ...state, locations: [...state.locations, action.payload] };
         case CHANGE_NAME:
             return { ...state, name: action.payload };
+        case RESET:
+            return { ...state, name: '', locations: [] };
 
         default:
             return state;
     }
 }
 
-const startRecording = (dispatch) => () => {
-    dispatch({ type: START_RECORDING });
-};
-const stopRecording = (dispatch) => () => {
-    dispatch({ type: STOP_RECORDING });
-};
+const startRecording = (dispatch) => () => dispatch({ type: START_RECORDING });
+const stopRecording = (dispatch) => () => dispatch({ type: STOP_RECORDING });
 const addLocation = (dispatch) => (location, isRecording) => {
     dispatch({ type: ADD_CURRENT_LOCATION, payload: location });
     if (isRecording) {
         dispatch({ type: ADD_LOCATION, payload: location });
     }
 };
-const changeName = (dispatch) => (name) => {
-    dispatch({ type: CHANGE_NAME, payload: name })
-}
+const changeName = (dispatch) => (name) => dispatch({ type: CHANGE_NAME, payload: name })
+const reset = dispatch => () => dispatch({ type: RESET });
 
 export const { Context, Provider } = createDataContext(
     locationReducer,
@@ -54,7 +52,8 @@ export const { Context, Provider } = createDataContext(
         startRecording,
         stopRecording,
         addLocation,
-        changeName
+        changeName,
+        reset
     },
     INITIAL_STATE
 );
