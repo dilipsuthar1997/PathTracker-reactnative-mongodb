@@ -56,7 +56,7 @@ const switchNavigator = createSwitchNavigator({
     tabBarComponent: props => (
       <TabBarComponent {...props} style={{
         shadowColor: colors.BLACK,
-        shadowOffset: { width: 0, height: matrics.Scale(-2) },
+        shadowOffset: { width: 0, height: matrics.Scale(-3) },
         shadowOpacity: 0.2,
         elevation: 3,
         backgroundColor: colors.WHITE
@@ -65,6 +65,7 @@ const switchNavigator = createSwitchNavigator({
     tabBarOptions: {
       activeTintColor: colors.PRIMARY_COLOR,
       inactiveTintColor: colors.GRAY,
+      labelStyle: { fontSize: 14 }
       // indicatorStyle: {
       //   backgroundColor: 'rgb(102,134,205)',
       //   height: 2

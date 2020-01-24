@@ -46,7 +46,7 @@ const TrackCreateScreen = ({ isFocused }) => {
 
 TrackCreateScreen.navigationOptions = {
     title: 'Add Track',
-    tabBarIcon: ({tintColor}) => <Icon name="add-location" size={20} color={tintColor}/>
+    tabBarIcon: ({tintColor}) => <Icon name="add-location" size={25} color={tintColor}/>
 }
 
 const styles = StyleSheet.create({

@@ -37,7 +37,7 @@ const AccountScreen = () => {
 
 AccountScreen.navigationOptions = {
     title: 'Account',
-    tabBarIcon: ({tintColor}) =>  <Icon name="settings" size={20} color={tintColor}/>
+    tabBarIcon: ({tintColor}) =>  <Icon name="settings" size={25} color={tintColor}/>
 }
 
 const styles = StyleSheet.create({});
