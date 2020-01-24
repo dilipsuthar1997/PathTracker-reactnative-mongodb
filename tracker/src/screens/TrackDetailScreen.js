@@ -1,19 +1,21 @@
-import React, { useContext } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { View, StyleSheet, ActivityIndicator } from 'react-native';
+import { Card } from 'react-native-elements';
 import { Context as TrackContext } from '../context/TrackContext';
 import MapView, { Polyline } from 'react-native-maps';
+import { NavigationEvents } from 'react-navigation';
 
 const TrackDetailScreen = ({ navigation }) => {
     const { state } = useContext(TrackContext);
+    const[focus, setFocus] = useState(false); 
 
     const _id = navigation.getParam('_id');
     const track = state.find(t => t._id === _id);
 
     const initialCoord = track.locations[0].coords;
 
-    return(
-        <View>
-            <Text style={{fontSize: 48}}>{track.name}</Text>
+    const renderMapView = () => {
+        return focus ?
             <MapView
                 initialRegion={{
                     ...initialCoord,
@@ -27,14 +29,23 @@ const TrackDetailScreen = ({ navigation }) => {
                         track.locations.map(loc => loc.coords)
                     }
                 />
-            </MapView>
+            </MapView> : <View style={{height: 300, justifyContent: 'center'}}><ActivityIndicator size="large"/></View>
+    }
+
+    return(
+        <View>
+            <NavigationEvents
+                onDidFocus={() => setFocus(true)}
+            />
+            {renderMapView()}
+            <Card title={track.name}/>
         </View>
     );
 }
 
 TrackDetailScreen.navigationOptions = () => {
     return {
-        title: 'Track Details'
+        headerTitle: 'Track Details',
     }
 }
 

@@ -19,10 +19,24 @@ import TrackListScreen from './src/screens/TrackListScreen'
 
 const TabBarComponent = props => <BottomTabBar {...props} />;
 
-const trackListFlow = createStackNavigator({
-  TrackList: TrackListScreen,
-  TrackDetail: TrackDetailScreen
-});
+const trackListFlow = createStackNavigator(
+  {
+    TrackList: TrackListScreen,
+    TrackDetail: TrackDetailScreen
+  }, {
+      defaultNavigationOptions: {
+        headerTintColor: colors.WHITE,
+        headerTitleStyle: {
+            color: colors.WHITE
+        },
+        headerStyle: {
+            backgroundColor: colors.PRIMARY_COLOR
+        },
+        headerBackTitleStyle: {
+            color: colors.WHITE
+        }
+      }
+    });
 trackListFlow.navigationOptions = {
   title: 'Tracks',
   tabBarIcon: ({tintColor}) => <Icon name="list" size={25} color={tintColor}/>

@@ -1,7 +1,7 @@
 import '../_mockLocation';
 import React, { useContext, useCallback, useState } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text, Header } from 'react-native-elements';
 import { SafeAreaView, withNavigationFocus } from 'react-navigation';
 import Map from '../components/Map';
 import { Context as LocationContext } from '../context/LocationContext';
@@ -23,17 +23,24 @@ const TrackCreateScreen = ({ isFocused }) => {
     const [err] = useLocation(isFocused || isRecording, memoizedCallback);
 
     return(
-        <SafeAreaView forceInset={{ top: 'always' }}>
-            <Text h3>Track Create Screen</Text>
-            <View>
-                <Map/>
-                <TouchableOpacity style={styles.locateMeContainer}>
-                    <Icon name="my-location" size={25}/>
-                </TouchableOpacity>
-            </View>
-            {err ? <Text>Please enable location permission.</Text> : null}
-            <TrackForm/>
-        </SafeAreaView>
+        <>
+            <Header
+                leftComponent={{}}
+                centerComponent={{ text: 'Add Tracks', style: { color: '#fff', fontSize: 18 } }}
+                rightComponent={{}}
+                backgroundColor={colors.PRIMARY_COLOR}
+            />
+            <SafeAreaView forceInset={{ bottom: 'always', top: 'never' }}>
+                <View>
+                    <Map/>
+                    <TouchableOpacity style={styles.locateMeContainer}>
+                        <Icon name="my-location" size={25}/>
+                    </TouchableOpacity>
+                </View>
+                {err ? <Text>Please enable location permission.</Text> : null}
+                <TrackForm/>
+            </SafeAreaView>
+        </>
     );
 }
 

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, StatusBar } from 'react-native';
 import { Context as AuthContext } from '../context/AuthContext';
-import { images, matrics } from '../commonConfig';
+import { images, matrics, colors } from '../commonConfig';
 
 const SplashScreen = () => {
 
@@ -24,7 +24,7 @@ const SplashScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#000',
+        backgroundColor: colors.PRIMARY_COLOR,
         flex: matrics.Scale(1),
         justifyContent: 'center',
         alignItems: 'center'
