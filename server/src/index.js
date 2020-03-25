@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(trackRoutes);
 
-const mongoUri = 'mongodb+srv://admin:passwordpassword@cluster0-60ynb.mongodb.net/test?retryWrites=true&w=majority'
+const mongoUri = 'YOUR_MONGODB_URI'
 mongoose.connect(mongoUri, {
     useNewUrlParser: true,
     useCreateIndex: true,
